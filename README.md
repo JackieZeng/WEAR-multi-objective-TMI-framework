@@ -2,7 +2,9 @@
 
 This repository contains the implementation of **WEAR** from the paper:
 
-> **A multi-objective framework for travel mode identification across hierarchical travel semantics**
+> Zeng Jiaqi, Zhang Meng, Rong Donglei, Huang Yulang, Jin Sheng, Wang Dianhai\*. **A Multi-Objective Framework for Travel Mode Identification Across Hierarchical Travel Semantics.** *IEEE Transactions on Intelligent Transportation Systems*, 2026. DOI: [10.1109/TITS.2026.3750194](https://doi.org/10.1109/TITS.2026.3750194).
+
+\* Corresponding author.
 
 WEAR identifies travel modes from GPS trajectories and evaluates predictions at the point, transfer, trip-leg, and mode-chain levels. The implementation combines convolutional and bidirectional recurrent encoders with CRF decoding, weighted classification loss, and adjacent contrastive loss.
 
