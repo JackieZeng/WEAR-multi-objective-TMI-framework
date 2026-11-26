@@ -205,7 +205,9 @@ for icase, (seed, split, loss_param) in enumerate(caseiter):
         # -- save model --
         args.logger.log_string('CRF transition:\n{}'.format(model.crf.transitions))
         initial.create_path(model_save_path)
-        torch.save(model.state_dict(), model_save_path + '{}_weights.pth'.format(model_name))
+        weights_path = model_save_path + '{}_weights.pth'.format(model_name)
+        with open(weights_path, 'wb') as f:
+            torch.save(model.state_dict(), f)
 
         #%% == Evaluating model ==
         
@@ -232,7 +234,9 @@ for icase, (seed, split, loss_param) in enumerate(caseiter):
     for key, seq_infos in seq_infos_all.items():
         ident_dir = str(SCRIPT_DIR / 'identified_trajectories' / split) + os.sep
         initial.create_path(ident_dir)
-        seq_infos.to_parquet(ident_dir + f'seq_infos-model=({mname})-{suffix_model}-{key}.parquet', index=True)
+        ident_path = ident_dir + f'seq_infos-model=({mname})-{suffix_model}-{key}.parquet'
+        with open(ident_path, 'wb') as f:
+            seq_infos.to_parquet(f, index=True)
 
         # evaluate identification quality
         correctness, transfer, tripleg, mode_chain = metrics.evaluate_from_sequence(seq_infos)
